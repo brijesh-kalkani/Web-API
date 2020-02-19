@@ -3,7 +3,7 @@ from .models import Person
 
 from rest_framework import serializers
 
-class PersonSerializerrs(serializers.Serializer):
+class PersonSerializers(serializers.ModelSerializer):
     class Meta:
-        model = PersonView
+        model = Person
         fields = "__all__"

@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parents[1]
 
@@ -38,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    # 'django_filters.rest_framework.DjangoFilterBackend',
+    # 'django_filters.rest_framework'
     # 'django_filters',
     'FirstAPI',
     # 'models.Person'
@@ -81,9 +82,10 @@ WSGI_APPLICATION = 'WebAPI.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
         # 'NAME': '/tmp/WebAPI.sqlite3',
-        'NAME': '/tmp/mysite.sqlite3',
+        # 'NAME': '/tmp/mysite.sqlite3',
+        # 'NAME': '/tmp/mysite.sqlite3',
     }
 }
 
@@ -125,3 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}

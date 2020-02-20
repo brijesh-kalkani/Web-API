@@ -6,32 +6,41 @@ from django import forms
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-# sys.path.append("/Users/sierra/Courses/WebAPI/FirstAPI")
 from .models import Person
 from .serializer import PersonSerializers
 
-# import PersonSerializerrs
-# import Person
+from rest_framework import generics
 
-class PersonView(APIView):
+# from django_filters.rest_framework import DjangoFilterBackend
 
-    def get(self,request):
-        data = Person.objects.all()
-        print("=======",data)
-        serializer = PersonSerializers(data,many=True)
-        return Response(serializer.data)
+class PersonView(generics.ListAPIView):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializers
+    # filter_backends = (DjangoFilterBackend,SearchFilter)
 
-    def post(self,request,format=None):
-        try:
-            serializer = PersonSerializers(data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            else:
-                return Response(serializer.data, status=status.HTTP_400_OK)
 
-        except Exception as e:
-            return Response(serializer.data, status=status.HTTP_400_OK)
+
+
+
+# class PersonView(APIView):
+#
+#     def get(self,request):
+#         data = Person.objects.all()
+#         print("=======",data)
+#         serializer = PersonSerializers(data,many=True)
+#         return Response(serializer.data)
+#
+#     def post(self,request,format=None):
+#         try:
+#             serializer = PersonSerializers(data=request.data)
+#             if serializer.is_valid():
+#                 serializer.save()
+#                 return Response(serializer.data, status=status.HTTP_200_OK)
+#             else:
+#                 return Response(serializer.data, status=status.HTTP_400_OK)
+#
+#         except Exception as e:
+#             return Response(serializer.data, status=status.HTTP_400_OK)
 
 
 
